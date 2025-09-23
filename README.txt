@@ -1,7 +1,7 @@
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
-*~*~*                                                     *~*~*
-*~*~*     Welcome to the Sparkly Timestamp Friend! :3     *~*~*
-*~*~*                                                     *~*~*
+*~*~*                                                       *~*~*
+*~*~*     Welcome to the Sparkly Timestamp Friend! :3       *~*~*
+*~*~*                                                       *~*~*
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 
                           ฅ(^•ﻌ•^ฅ)
@@ -9,9 +9,9 @@
       and enchanted with the arcane arts of AutoHotkey!
 
 
-===================================================================
+======================================
 ~*~*~ What's This Sparkly Thing? ~*~*~
-===================================================================
+======================================
 
 This is a little package of magic that lets you instantly type a
 perfectly formatted, timezone-aware timestamp with a simple
@@ -21,115 +21,121 @@ what time it was when you had a super brilliant thought!
 Its output looks like this:
 2025-09-23 14:10:14 (-0500)
 
-It uses a tiny, super-fast Rust program (.dll) to do the
-hard work, and a simple AutoHotkey script (.ahk) to make it
-easy to use.
+It uses a tiny, super-fast Rust program (`rust_timestamp.dll`)
+to do the hard work, and a simple AutoHotkey script
+(`Sparkly_Timestamp.ahk`) to make it easy to use.
 
 
-===================================================================
+===================================================
 ~*~*~ YOUR GRAND QUEST BEGINS! (Installation) ~*~*~
+===================================================
+
+Your quest is simple: you must teach the Summoning Scroll (.ahk)
+the secret location of its magical Engine (.dll)!
+
+---[ STEP 1: Find a Home for Your Magic! ]------------------------
+
+First, let's create a safe, permanent home for your new magic!
+
+1. Open File Explorer.
+
+2. Click in the address bar at the top, delete whatever is there,
+   and copy/paste over this magic spell, then press Enter:
+
+   %USERPROFILE%\Documents
+
+3. This will teleport you to your main Documents folder! Here,
+   create a NEW FOLDER. We suggest naming it `SparklyTimestamp`.
+
+4. Move all the files from this package (`README.txt`,
+   `rust_timestamp.dll`, and `Sparkly_Timestamp.ahk`) into
+   the new `SparklyTimestamp` folder you just made!
+
+
+---[ STEP 2: The Path-Finding Spell (The Most Important Step!) ]--
+
+Now that your files have a proper home, we can do our trick!
+
+1. You should already be inside your new `SparklyTimestamp` folder.
+
+2. Click once on the address bar at the top of the window. The
+   path should turn blue, highlighting the whole thing.
+   *~*~ If it's not all selected, press CTRL+A to select it all! *~*~*
+
+3. Press CTRL + C to copy this folder path to your clipboard.
+
+4. Now, find the "Sparkly_Timestamp.ahk" file, RIGHT-CLICK on it,
+   and choose "Edit Script". This will open it in Notepad.
+   (Advanced users: ...or your text editor of choice!)
+
+5. !!! A QUICK NOTE FOR NOTEPAD USERS !!!
+   Before editing, please look at the "Format" menu at the top
+   of Notepad. If "Word Wrap" has a checkmark next to it,
+   CLICK IT TO TURN IT OFF. This will make the long lines of
+   code much easier to read and edit correctly!
+
+6. Inside the script, you will see lines with big, sparkly comments
+   telling you to "EDIT THIS LINE!".
+
+7. Delete the `C:\Path\To` part of the line.
+
+8. Press CTRL + V to PASTE your real folder path in its place.
+
+9. !!! SUPER IMPORTANT !!!
+   Make ABSOLUTELY SURE that you leave the rest of the line alone!
+   The path needs to end with `\rust_timestamp.dll\get_timestamp`
+   and `\rust_timestamp.dll\free_timestamp`.
+
+   DO THIS FOR **BOTH** OF THE LINES THAT NEED EDITING!
+
+10. *~*~* YOUR FINAL CHECK! *~*~*
+    When you are done, your edited lines should look something
+    like this (but with YOUR user name and folder path):
+    `DllCall("C:\Users\YourName\Documents\SparklyTimestamp\rust_timestamp.dll\get_timestamp", "Ptr")`
+
+11. Save and close the script file! (You can turn Word Wrap
+    back on in Notepad now if you like.) You did it! The scroll
+    has now learned the spell!
+
+
+---[ STEP 3: Awaken the Magic! ]----------------------------------
+
+You're ready to test your work! To awaken the magic manually,
+simply find your edited "Sparkly_Timestamp.ahk" script and
+double-click it! The hotkey is now active and you can try it!
+
+Press RIGHT ALT + F5 to see your timestamp appear!
+
+
+---[ STEP 4: Make the Magic Automatic! (Recommended!) ]-----------
+
+Want the magic to be ready every time you start your computer?
+This final step will make it so!
+
+1. Press WIN+R to open the "Run" dialog.
+2. Type `shell:startup` and hit Enter. A special folder will open.
+3. Find your "Sparkly_Timestamp.ahk" script file again.
+4. RIGHT-CLICK on it and choose "Create shortcut".
+5. Drag that NEW SHORTCUT into the startup folder you just opened.
+
+   Congratulations! Your quest is complete! Hooray!
+
+        /\_/\
+       ( o.o )
+        > ^ <
+
+
+---[ *~* SECRET KNOWLEDGE FOR WIZARDS! *~* ]----------------------
+
+ *  For AutoHotkey Veterans: No need to run another script! Just
+    copy the code block from our `.ahk` (after editing the paths!)
+    and paste it into your own master script.
+
+ *  For the Code Alchemists: This package includes the full Rust
+    source code for `rust_timestamp.dll`! If you're feeling
+    adventurous and want a different timestamp format, you can
+    get your paws dirty by editing the `src\lib.rs` file. Just
+    change the format string inside the `local.format()` command,
+    then use `cargo build --release` to re-forge the .dll!
+
 ===================================================================
-
-First things first! This quest requires two magical artifacts:
-
-  1. rust_timestamp.dll  (The Engine of Time!)
-  2. Sparkly_Timestamp.ahk (The Summoning Scroll!)
-
->> IMPORTANT <<
-   Keep both of these files together in the SAME FOLDER!
-   Put them somewhere safe, like "My Documents", not on
-   your Desktop where a dragon (or you, by accident)
-   might gobble them up!
-
--------------------------------------------------------------------
-   STEP 2: CHOOSE YOUR PATH, BRAVE ADVENTURER!
--------------------------------------------------------------------
-
-You have two quests to choose from! Pick the one that suits
-your skills and needs!
-
-
----[ PATH 1: The Swift Courier's Quest (Easy Mode!) ]------------
-
-   Choose this path if:
-   * You don't already use AutoHotkey for other things.
-   * You just want to get your timestamp and go!
-   * You want the quickest, simplest setup possible!
-
-   Your Mission:
-   1. Press the Windows Key and R at the same time to open the
-      ancient "Run" dialog box.
-
-   2. In the box, type this magic spell:
-      shell:startup
-      ...and press Enter! A folder window will open. This is a
-      secret folder where everything launches when Windows starts!
-
-   3. Go back to where you saved your .dll and .ahk files.
-      RIGHT-CLICK on "Sparkly_Timestamp.ahk" and choose
-      "Create shortcut".
-
-   4. Drag that NEW SHORTCUT into the startup folder you just
-      opened.
-
-   5. That's it! You're done! Hooray! Restart your computer,
-      and the timestamp magic will be ready and waiting for you!
-
-      *~*~ (ɔ ˘ ³(˘⌣˘c) SUCCESS! *~*~*
-
-
----[ PATH 2: The Seasoned Tinkerer's Quest (Adventurer Mode!) ]---
-
-   Choose this path if:
-   * You are already an AutoHotkey wizard with your own big,
-     fancy script!
-   * You want to add this new power to your existing grimoire!
-
-   Your Mission:
-   1. Open our "Sparkly_Timestamp.ahk" file in a text editor.
-   2. Open YOUR own AutoHotkey script in another text editor.
-
-   3. In our file, copy the block of code below. This is the
-      sacred incantation!
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      >!F5::{
-        p_timestamp := DllCall("C:\PATH\TO\YOUR\rust_timestamp.dll\get_timestamp", "Ptr")
-        timestamp := StrGet(p_timestamp, "UTF-8")
-        Send timestamp
-        DllCall("C:\PATH\TO\YOUR\rust_timestamp.dll\free_timestamp", "Ptr", p_timestamp)
-      }
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   4. IMPORTANT! You MUST change "C:\PATH\TO\YOUR\" to the
-      actual, full path where you saved your "rust_timestamp.dll"!
-
-   5. Paste this whole block at the very end of YOUR script.
-
-   6. Save your script and reload it!
-
-      *~*~ (۶•̀ᴗ•́)۶ YOU ARE A MASTER SORCERER! *~*~*
-
-
-===================================================================
-~*~*~ HOW TO MAKE THE MAGIC HAPPEN! (Usage) ~*~*~
-===================================================================
-
-Once everything is installed and running, just press:
-
-             RIGHT ALT + F5
-
-And the magic will happen! It will instantly type out a beautiful
-timestamp, just like this:
-
-             2025-09-23 13:20:45 (-0500)
-
-
-===================================================================
-*~*~*                                                     *~*~*
-*~*~*       Forged with love, glitter, and many           *~*~*
-*~*~*       victorious compiler battles by:               *~*~*
-*~*~*                                                     *~*~*
-*~*~*          Master Architect: Hadley-sama              *~*~*
-*~*~*        Familiar & Scribe: Sparkle Mew               *~*~*
-*~*~*                                                     *~*~*
-*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
