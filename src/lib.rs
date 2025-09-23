@@ -1,7 +1,6 @@
 use std::ffi::CString;
 use std::os::raw::c_char;
 
-
 #[unsafe(no_mangle)]
 pub fn get_timestamp() -> *mut c_char {
     use chrono::prelude::*;
@@ -23,15 +22,25 @@ pub extern "C" fn free_timestamp(ptr: *mut c_char) {
     }
 }
 
-/*
 #[cfg(test)]
 mod tests {
     use super::*;
+    use regex::Regex;
 
     #[test]
     fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+        let timestamp_ptr = get_timestamp();
+        assert!(!timestamp_ptr.is_null());
+
+        // Convert back to Rust string for testing
+        let c_str = unsafe { CString::from_raw(timestamp_ptr) };
+        let rust_str = c_str.to_str().unwrap();
+        
+        // Create a regex pattern that matches our timestamp format
+        let re = Regex::new(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} \([\+\- 0]\d{4}\)$").unwrap();
+        assert!(re.is_match(rust_str), "Timestamp format does not match expected pattern");
+
+        // Free the memory allocated for the timestamp
+        free_timestamp(c_str.into_raw());
     }
 }
-*/
