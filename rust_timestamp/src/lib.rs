@@ -27,6 +27,8 @@ mod tests {
     use super::*;
     use regex::Regex;
 
+    // Only test the format of the timestamp, not the actual value
+    // Those tests are better suited for whoever maintains chrono
     #[test]
     fn it_works() {
         let timestamp_ptr = get_timestamp();
