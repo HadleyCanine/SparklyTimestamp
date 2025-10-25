@@ -46,3 +46,35 @@ mod tests {
         free_timestamp(c_str.into_raw());
     }
 }
+
+#[unsafe(no_mangle)]
+pub fn get_unit_conversion(input: *mut c_char) -> *mut c_char {
+    if input.is_null() { return std::ptr::null_mut(); }
+
+    // Safely read the input string without taking ownership
+    let c_str = unsafe { std::ffi::CStr::from_ptr(input) };
+    
+    // Safely convert to Rust string, with error handling
+    let rust_str = match c_str.to_str() {
+        Ok(s) => s,
+        Err(_) => return std::ptr::null_mut()
+    };
+
+    // Perform the unit conversion (dummy implementation)
+    let converted = format!("{}", rust_str.chars().rev().collect::<String>());
+
+    // Create new C string to return
+    match CString::new(converted) {
+        Ok(c_str) => c_str.into_raw(),
+        Err(_) => std::ptr::null_mut()
+    }
+}
+
+#[unsafe(no_mangle)]
+pub fn free_unit_conversion(ptr: *mut c_char) {
+    if ptr.is_null() { return }
+    unsafe {
+        // Now we take back the treasure map and let Rust clean it up properly!
+        let _ = CString::from_raw(ptr);
+    }
+}
