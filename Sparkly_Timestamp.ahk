@@ -5,31 +5,21 @@
 ; !!! ATTENTION, BRAVE ADVENTURER! YOU MUST EDIT THIS FILE! !!!
 ;
 ; This script needs to know the secret location of its magical engine,
-; the "rust_timestamp.dll" file. Please read the README.txt file for
-; a super-friendly quest guide on how to set this up perfectly!
+; the "rust_timestamp.dll" file:
 
-global sparklyTimestamp := "C:\Users\hadley\Documents\dev\rust_timestamp\rust_timestamp\target\release\rust_timestamp.dll"
+global sparklyTimestamp := "C:\Path\To\rust_timestamp.dll"
 
-; global sparklyTimestamp := "C:\Path\To\rust_timestamp.dll"
+
+;; TIMESTAMP
 
 >!F5::{
-  ; v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
-  ; *~*~ EDIT THIS LINE! Change "C:\Path\To" to your actual path! ~*~*
-  ;    LEAVE the "\rust_timestamp.dll\get_timestamp" part at the end!
-  ;
-  p_timestamp := DllCall("C:\Path\To\rust_timestamp.dll\get_timestamp", "Ptr")
-  ; ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+  p_timestamp := DllCall(sparklyTimestamp . "\get_timestamp", "Ptr")
 
   timestamp := StrGet(p_timestamp, "UTF-8")
 
   Send timestamp
 
-  ; v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
-  ; *~*~ EDIT THIS LINE, TOO! Use the exact same path as above! ~*~*
-  ;      AGAIN, LEAVE the "\rust_timestamp.dll\free_timestamp" part!
-  ;
-  DllCall("C:\Path\To\rust_timestamp.dll\free_timestamp", "Ptr", p_timestamp)
-  ; ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+  DllCall(sparklyTimestamp . "\free_timestamp", "Ptr", p_timestamp)
 }
 
 
@@ -71,6 +61,9 @@ $Backspace:: {
 >!F9::{
     global inputBuffer, sparklyTimestamp
 
+    ; workaround for this key getting stuck down on this complex input
+    Send("{RAlt Up}")
+
     p_converted := DllCall(sparklyTimestamp . "\get_unit_conversion", "AStr", inputBuffer, "Ptr")
 
     ; only proceed if a valid pointer
@@ -80,10 +73,8 @@ $Backspace:: {
     }
 
     converted := StrGet(p_converted, "UTF-8")
-    Send converted
+    Send("{Text}" . converted)
 
     DllCall(sparklyTimestamp . "\free_unit_conversion", "Ptr", p_converted)
 }
-
-
 
