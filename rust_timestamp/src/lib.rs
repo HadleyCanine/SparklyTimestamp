@@ -103,7 +103,7 @@ pub fn get_unit_conversion(input: *mut c_char) -> *mut c_char {
                 .unwrap_or("unknown");
 
             // Call fend with our conversion expression, WITH ERROR HANDLING
-            let fend_expr = format!("{} {} to {}", number, unit, target_unit);
+            let fend_expr = format!("{} {} to {} to 4dp", number, unit, target_unit);
             let conversion_result = match Command::new("fend").arg(&fend_expr).output() {
                 Ok(output) => String::from_utf8_lossy(&output.stdout).trim().to_string(),
                 Err(e) => format!("Error running command: {}", e),
