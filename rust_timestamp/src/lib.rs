@@ -11,24 +11,33 @@ lazy_static! {
         ("°C", "°F"),
         ("cm", "inch"),
         ("m", "ft"),
+        ("meter", "foot"),
         ("meters", "feet"),
         ("km", "mi"),
         ("kph", "mph"),
         ("km/h", "mph"),
+        ("kilometer", "mile"),
         ("kilometers", "miles"),
         ("kg", "lb"),
+        ("kilogram", "pound"),
         ("kilograms", "pounds"),
         ("g", "oz"),
+        ("gram", "ounce"),
         ("grams", "ounces"),
         ("L", "gal"),
+        ("liter", "gallon"),
         ("liters", "gallons"),
         ("ml", "floz"),
+        ("milliliter", "fluid ounce"),
         ("milliliters", "fluid ounces"),
-        ("m/s", "ft/s"),
+        ("m/s", "mph"),
+        ("f/s", "m/s"),
         ("N", "lbf"),
+        ("newton", "pounds force"),
         ("newtons", "pounds force"),
         ("Pa", "psi"),
-        ("pascals", "pounds per square inch"),
+        ("pascal", "psi"),
+        ("pascals", "psi"),
     ];
 
     // Build our regexp dynamically from the unit pairs
@@ -105,8 +114,17 @@ pub fn get_unit_conversion(input: *mut c_char) -> *mut c_char {
             // Call fend with our conversion expression, WITH ERROR HANDLING
             let fend_expr = format!("{} {} to {} to 4dp", number, unit, target_unit);
             let conversion_result = match Command::new("fend").arg(&fend_expr).output() {
-                Ok(output) => String::from_utf8_lossy(&output.stdout).trim().to_string(),
-                Err(e) => format!("Error running command: {}", e),
+                Ok(output) => {
+                    let stdout = String::from_utf8_lossy(&output.stdout).trim().to_string();
+                    let stderr = String::from_utf8_lossy(&output.stderr).trim().to_string();
+
+                    if !stderr.is_empty() {
+                        format!(" (ERROR: {}{})", stdout, stderr)
+                    } else {
+                        stdout
+                    }
+                }
+                Err(e) => format!(" (Error running command: {})", e),
             };
 
             // Format our final result
