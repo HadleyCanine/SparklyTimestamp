@@ -20,6 +20,9 @@ of sparkly helpers quickly:
 - A tiny unit autoconversion that appends a converted value
    (hotkey: Right Alt / AltGr + F9)
 
+(Unit conversion requires the unit-aware calculator fend to be
+installed, for which instructions to install are included below)
+
 Both helpers use a tiny, super-fast Rust engine (`rust_timestamp.dll`)
 to do the work and an AutoHotkey script (`Sparkly_Timestamp.ahk`) to
 connect the magic to your keyboard.
@@ -31,7 +34,7 @@ Unit conversion example — what the autoconversion looks like in practice:
 If you type: 25cm
 Then press: Right Alt (AltGr) + F9
 It will append something like:  (approx. 9.8425 inches)
-(The conversion is performed to 4 decimal places by the bundled tool.)
+(The conversion is performed to 4 decimal places.)
 
 
 ===================================================
@@ -40,6 +43,30 @@ It will append something like:  (approx. 9.8425 inches)
 
 Your quest is simple: you must teach the Summoning Scroll (.ahk)
 the secret location of its magical Engine (.dll)!
+
+
+---[ OPTIONAL: Install the `fend` tool ]-----------------------
+
+(NOTE: This is only needed if you want to use unit conversion.
+If you only need timestamps, you can skip this step!)
+
+The unit autoconversion feature uses the external tool `fend` to
+perform numeric and unit conversions. If you want this feature,
+install `fend` on your Windows system using one of the methods below.
+
+Official docs and downloads are at:
+https://printfn.github.io/fend/documentation/
+
+Recommendation for most users: use the standard Windows installer
+(MSI) available from the project's documentation page — it's the
+simplest, most straightforward installer for Windows users.
+
+If you prefer package managers, optional commands (for advanced
+users) are:
+
+winget install fend
+choco install fend
+
 
 ---[ STEP 1: Find a Home for Your Magic! ]------------------------
 
@@ -93,7 +120,7 @@ Now that your files have a proper home, we can do our trick!
    to call the DLL, so you only need to edit one line.
 
 
----[ STEP 3: Awaken the Magic! ]----------------------------------
+---[ STEP 3: Awaken the Magic! ]---------------------------------
 
 You're ready to test your work! To awaken the magic manually,
 simply find your edited "Sparkly_Timestamp.ahk" script and
@@ -127,8 +154,8 @@ This final step will make it so!
 ---[ *~* SECRET KNOWLEDGE FOR WIZARDS! *~* ]----------------------
 
  *  For AutoHotkey Veterans: No need to run another script! Just
-    copy the code block from our `.ahk` (after editing the paths!)
-    and paste it into your own master script.
+    copy the code block from our `.ahk` (after editing the DLL
+    path inside it!) and paste it into your own master script.
 
  *  For the Code Alchemists: This package includes the full Rust
     source code for `rust_timestamp.dll`! If you're feeling
