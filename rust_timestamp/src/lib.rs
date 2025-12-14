@@ -10,6 +10,7 @@ lazy_static! {
         ("C", "F"),
         ("°C", "°F"),
         ("cm", "inch"),
+        ("in", "cm"),
         ("m", "ft"),
         ("meter", "foot"),
         ("meters", "feet"),
@@ -49,7 +50,7 @@ lazy_static! {
         }
 
         // Join all units with | and build the full pattern
-        let pattern = format!(r"([\d.]+)\s*({})\s*$", units.join("|"));
+        let pattern = format!(r"(-?[\d.]+)\s*({})\s*$", units.join("|"));
         Regex::new(&pattern).unwrap()
     };
 }
@@ -96,7 +97,12 @@ pub fn get_unit_conversion(input: *mut c_char) -> *mut c_char {
     let result = match CONVERSION_REGEX.captures(rust_str) {
         Some(caps) => {
             let number = &caps[1];
-            let unit = &caps[2];
+            let unit = if &caps[2] == "in" {
+                "inch" // fend uses "inch" not "in"
+            } else {
+                &caps[2]
+            };
+            
 
             let target_unit = UNIT_PAIRS
                 .iter()
