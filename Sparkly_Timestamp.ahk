@@ -13,13 +13,14 @@ global sparklyTimestamp := "C:\Path\To\rust_timestamp.dll"
 ;; TIMESTAMP
 
 >!F5::{
-  p_timestamp := DllCall(sparklyTimestamp . "\get_timestamp", "Ptr")
+    global sparklyTimestamp
+    p_timestamp := DllCall(sparklyTimestamp . "\get_timestamp", "Ptr")
+    timestamp := StrGet(p_timestamp, "UTF-8")
 
-  timestamp := StrGet(p_timestamp, "UTF-8")
+    Send timestamp
 
-  Send timestamp
+    DllCall(sparklyTimestamp . "\free_timestamp", "Ptr", p_timestamp)
 
-  DllCall(sparklyTimestamp . "\free_timestamp", "Ptr", p_timestamp)
 }
 
 
@@ -33,6 +34,7 @@ global bufferSize := 64
 
 ih := InputHook("V") ; V for visible (typed text goes where it was supposed to)
 ih.OnChar := OnCharHandler
+ih.OnEnd := OnHookEnd
 ih.Start()
 
 OnCharHandler(ih, char) {
@@ -42,6 +44,25 @@ OnCharHandler(ih, char) {
 
     if StrLen(inputBuffer) > bufferSize
         inputBuffer := SubStr(inputBuffer, StrLen(inputBuffer) - bufferSize + 1)
+}
+
+; The "Keep-Alive" Handler
+OnHookEnd(dead_ih) {
+    global ih
+
+    ; If the script is actually closing, let it die.
+    ; But if the hook just stopped randomly, RESTART IT! ⚡
+    ; ih.Start()
+
+    ; Hadley Fix: ih isn't global
+    ih := InputHook("V")
+    ih.OnChar := OnCharHandler
+    ih.OnEnd := OnHookEnd
+    ih.Start()
+
+    
+    ; Optional: Sparkle Debug to prove it's working
+    ; MsgBox("Sparkle Mew: I just restarted your InputHook! 😺")
 }
 
 ; Bind backspace so we can handle that if someone makes a typo in the measurement
