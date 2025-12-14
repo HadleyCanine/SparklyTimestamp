@@ -13,17 +13,25 @@
 ~*~*~ What's This Sparkly Thing? ~*~*~
 ======================================
 
-This is a little package of magic that lets you instantly type a
-perfectly formatted, timezone-aware timestamp with a simple
-hotkey! It's super handy for notes, logs, or just knowing
-what time it was when you had a super brilliant thought!
+This is a little package of magic that helps you type two kinds
+of sparkly helpers quickly:
 
-Its output looks like this:
+- A timezone-aware timestamp (hotkey: Right Alt / AltGr + F5)
+- A tiny unit autoconversion that appends a converted value
+   (hotkey: Right Alt / AltGr + F9)
+
+Both helpers use a tiny, super-fast Rust engine (`rust_timestamp.dll`)
+to do the work and an AutoHotkey script (`Sparkly_Timestamp.ahk`) to
+connect the magic to your keyboard.
+
+Timestamp example (what the timestamp looks like when you summon it):
 2025-09-23 14:10:14 (-0500)
 
-It uses a tiny, super-fast Rust program (`rust_timestamp.dll`)
-to do the hard work, and a simple AutoHotkey script
-(`Sparkly_Timestamp.ahk`) to make it easy to use.
+Unit conversion example — what the autoconversion looks like in practice:
+If you type: 25cm
+Then press: Right Alt (AltGr) + F9
+It will append something like:  (approx. 9.8425 inches)
+(The conversion is performed to 4 decimal places by the bundled tool.)
 
 
 ===================================================
@@ -74,28 +82,15 @@ Now that your files have a proper home, we can do our trick!
    CLICK IT TO TURN IT OFF. This will make the long lines of
    code much easier to read and edit correctly!
 
-6. Inside the script, you will see lines with big, sparkly comments
-   telling you to "EDIT THIS LINE!".
+6. Inside the script you'll find a single global variable near the top that points
+   to the DLL. Edit only that one line instead of hunting for DllCall calls:
 
-7. Delete the `C:\Path\To` part of the line.
+   Example (replace with your real path):
 
-8. Press CTRL + V to PASTE your real folder path in its place.
+   global sparklyTimestamp := "C:\Users\YourName\Documents\SparklyTimestamp\rust_timestamp.dll"
 
-9. !!! SUPER IMPORTANT !!!
-   Make ABSOLUTELY SURE that you leave the rest of the line alone!
-   The path needs to end with `\rust_timestamp.dll\get_timestamp`
-   and `\rust_timestamp.dll\free_timestamp`.
-
-   DO THIS FOR **BOTH** OF THE LINES THAT NEED EDITING!
-
-10. *~*~* YOUR FINAL CHECK! *~*~*
-    When you are done, your edited lines should look something
-    like this (but with YOUR user name and folder path):
-    `DllCall("C:\Users\YourName\Documents\SparklyTimestamp\rust_timestamp.dll\get_timestamp", "Ptr")`
-
-11. Save and close the script file! (You can turn Word Wrap
-    back on in Notepad now if you like.) You did it! The scroll
-    has now learned the spell!
+7. Save and close the script file. That's it — the AHK hotkeys use that variable
+   to call the DLL, so you only need to edit one line.
 
 
 ---[ STEP 3: Awaken the Magic! ]----------------------------------
@@ -105,6 +100,10 @@ simply find your edited "Sparkly_Timestamp.ahk" script and
 double-click it! The hotkey is now active and you can try it!
 
 Press RIGHT ALT + F5 to see your timestamp appear!
+
+Or type out a measurement (such as "25 inches" or "100C")
+and hit RIGHT ALT + F9 to autocomplete with a conversion
+to imperial/metric!
 
 
 ---[ STEP 4: Make the Magic Automatic! (Recommended!) ]-----------
