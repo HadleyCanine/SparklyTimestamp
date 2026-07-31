@@ -66,11 +66,8 @@ OnHookEnd(dead_ih) {
 }
 
 ; Bind backspace so we can handle that if someone makes a typo in the measurement
-$Backspace:: {
+~$Backspace:: {
     global inputBuffer
-
-    ; actually delete first of all
-    Send("{Backspace}")
 
     if StrLen(inputBuffer) > 0 {
         inputBuffer := SubStr(inputBuffer, 1, -1)

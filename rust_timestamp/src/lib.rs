@@ -130,7 +130,7 @@ pub fn get_unit_conversion(input: *mut c_char) -> *mut c_char {
                         stdout
                     }
                 }
-                Err(e) => format!(" (Error running command: {})", e),
+                Err(e) => format!(" (Oops! The fend command sparkled away: {})", e),
             };
 
             // Format our final result
